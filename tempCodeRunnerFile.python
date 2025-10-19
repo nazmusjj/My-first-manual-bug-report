@@ -1,0 +1,30 @@
+# Character Frequency Sorter
+
+def frequency_sort(text):
+    # 1️⃣ Normalize text: make lowercase and remove spaces
+    text = text.replace(" ", "").lower()
+
+    # 2️⃣ Count character frequencies using a dictionary
+    freq = {}
+    for ch in text:
+        freq[ch] = freq.get(ch, 0) + 1
+
+    # 3️⃣ Sort by frequency (descending), then alphabetically
+    sorted_chars = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
+
+    # 4️⃣ Build the output string by repeating characters by their count
+    result = "".join(ch * count for ch, count in sorted_chars)
+
+    return freq, result
+
+
+# --- Main Execution ---
+if __name__ == "__main__":
+    user_input = input("Enter a string: ")
+    freq_table, sorted_string = frequency_sort(user_input)
+
+    print("\nCharacter Frequency Table:")
+    for ch, count in freq_table.items():
+        print(f"  {ch} : {count}")
+
+    print(f"\nSorted by frequency: {sorted_string}")
